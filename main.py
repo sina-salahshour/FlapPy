@@ -23,6 +23,7 @@ pipe1.rect = pipe1.value.get_rect(center = (100,400))
 pipe1.value2 = pygame.transform.flip(pipe1.value, False, True)
 pipe1.rect2 = pipe1.value2.get_rect(center = (100,-15))
 screen = pygame.display.set_mode((bgsurface.value.get_width(),bgsurface.value.get_height()))
+pygame.display.set_caption('FlapPy',)
 clock = pygame.time.Clock()
 bird.v=0
 gravity = 0.05
