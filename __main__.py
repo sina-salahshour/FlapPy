@@ -27,6 +27,10 @@ pipe1 = object(pygame.image.load('assets/pipe-green.png'),[100, 200])
 pipe1.rect = pipe1.value.get_rect(center = (400,400))
 pipe1.value2 = pygame.transform.flip(pipe1.value, False, True)
 pipe1.rect2 = pipe1.value2.get_rect(center = (400,-15))
+pipe2 = object(pygame.image.load('assets/pipe-green.png'),[100, 200])
+pipe2.rect = pipe1.value.get_rect(center = (400+bgsurface.value.get_width()/2+pipe1.value.get_width()/2,400))
+pipe2.value2 = pygame.transform.flip(pipe1.value, False, True)
+pipe2.rect2 = pipe1.value2.get_rect(center = (400+bgsurface.value.get_width()/2+pipe1.value.get_width()/2,-15))
 wingsound = pygame.mixer.Sound('sounds/sfx_wing.wav')
 hitsound = pygame.mixer.Sound('sounds/sfx_hit.wav')
 diesound = pygame.mixer.Sound('sounds/sfx_die.wav')
@@ -38,8 +42,10 @@ clock = pygame.time.Clock()
 bird.v=0
 gravity = 0.05
 pipe1.gap = 415
+pipe2.gap = 415
 dead = [0,0]
 betweenpipe = False
+betweenpipe2 = False
 dontmove = False
 def die(dead):
     if dead[0] == 0:
@@ -58,7 +64,7 @@ while True:
     if bird.rect.centery >=375:
         die(dead)
         dontmove = True
-    if bird.rect.centerx-bird.value.get_width()/2 < pipe1.rect.centerx + pipe1.value.get_width()/2 and bird.rect.centerx+ bird.value.get_width()/2 > pipe1.rect.centerx - pipe1.value.get_width()/2:
+    if bird.rect.centerx-bird.value.get_width()/2 < pipe1.rect.centerx + pipe1.value.get_width()/2 - 5 and bird.rect.centerx+ bird.value.get_width()/2 > pipe1.rect.centerx - pipe1.value.get_width()/2:
         if bird.rect.centery + bird.value.get_height()/2 > pipe1.rect.centery - pipe1.value.get_height()/2 or bird.rect.centery - bird.value.get_height()/2 < pipe1.rect2.centery + pipe1.value2.get_height()/2:
             die(dead)
         else:
@@ -67,6 +73,15 @@ while True:
         if betweenpipe:
             pointsound.play()
             betweenpipe = False
+    if bird.rect.centerx-bird.value.get_width()/2 < pipe2.rect.centerx + pipe2.value.get_width()/2 - 5 and bird.rect.centerx+ bird.value.get_width()/2 > pipe2.rect.centerx - pipe2.value.get_width()/2:
+        if bird.rect.centery + bird.value.get_height()/2 > pipe2.rect.centery - pipe2.value.get_height()/2 or bird.rect.centery - bird.value.get_height()/2 < pipe2.rect2.centery + pipe2.value2.get_height()/2:
+            die(dead)
+        else:
+            betweenpipe2 = True
+    else:
+        if betweenpipe2:
+            pointsound.play()
+            betweenpipe2 = False
     sdraw(bgsurface)
     if dead[0] == 0:
         floor.pos[0] -=2
@@ -88,6 +103,8 @@ while True:
     if dead[0] == 0:
         pipe1.rect.centerx -= 2
         pipe1.rect2.centerx = pipe1.rect.centerx
+        pipe2.rect.centerx -= 2
+        pipe2.rect2.centerx = pipe2.rect.centerx
 
     if dead[0] == 1:
         dead[1] +=1
@@ -100,8 +117,13 @@ while True:
         pipe1.rect.centerx = bgsurface.value.get_width()+pipe1.value.get_width()/2
         pipe1.rect.centery = randint(265, 535)
         pipe1.rect2.centery = pipe1.rect.centery - pipe1.gap
+    if pipe2.rect.centerx <= -pipe2.value.get_width()/2:
+        pipe2.rect.centerx = bgsurface.value.get_width()+pipe2.value.get_width()/2
+        pipe2.rect.centery = randint(265, 535)
+        pipe2.rect2.centery = pipe2.rect.centery - pipe2.gap
     # sdraw(pipe1)
     pipedraw(pipe1)
+    pipedraw(pipe2)
     sdraw(floor)
     screen.blit(floor.value, (floor.pos[0]+floor.value.get_width(),floor.pos[1]))
     pygame.display.update()
