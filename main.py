@@ -45,7 +45,7 @@ while True:
         exit()
     if bird.rect.centerx+bird.value.get_width()/2 < pipe1.rect.centerx + pipe1.value.get_width()/2 and bird.rect.centerx-bird.value.get_width()/2 > pipe1.rect.centerx - pipe1.value.get_width()/2:
         if bird.rect.centery + bird.value.get_height()/2 > pipe1.rect.centery - pipe1.value.get_height()/2 or bird.rect.centery - bird.value.get_height()/2 < pipe1.rect2.centery + pipe1.value2.get_height()/2:
-            exit() 
+            exit()
     sdraw(bgsurface)
     floor.pos[0] -=2
     if floor.pos[0] <= -floor.value.get_width():
@@ -61,7 +61,7 @@ while True:
         bird.value = bird.value1
     # sdraw(bird)
     birddraw(bird)
-    print(bird.v)
+    # print(bird.v)
     pipe1.rect.centerx -= 2
     pipe1.rect2.centerx = pipe1.rect.centerx
 
