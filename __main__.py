@@ -57,7 +57,7 @@ while True:
             pygame.quit()
             exit()
         if event.type == pygame.KEYDOWN:
-            if dead[0] == 0:
+            if dead[0] == 0 and bird.rect.centery > 15:
                 if event.key == pygame.K_SPACE:
                     bird.v = -1.5
                     wingsound.play()
