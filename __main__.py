@@ -67,6 +67,9 @@ while True:
     if bird.rect.centerx-bird.value.get_width()/2 < pipe1.rect.centerx + pipe1.value.get_width()/2 - 5 and bird.rect.centerx+ bird.value.get_width()/2 > pipe1.rect.centerx - pipe1.value.get_width()/2:
         if bird.rect.centery + bird.value.get_height()/2 > pipe1.rect.centery - pipe1.value.get_height()/2 or bird.rect.centery - bird.value.get_height()/2 < pipe1.rect2.centery + pipe1.value2.get_height()/2:
             die(dead)
+            if bird.rect.centery + bird.value.get_height()/2 > pipe1.rect.centery - pipe1.value.get_height()/2:
+                if bird.rect.centerx-bird.value.get_width()/2 < pipe1.rect.centerx + pipe1.value.get_width()/2 - 10 and bird.rect.centerx+ bird.value.get_width()/2 > pipe1.rect.centerx - pipe1.value.get_width()/2+10:
+                    dontmove=True
         else:
             betweenpipe = True
     else:
@@ -76,6 +79,9 @@ while True:
     if bird.rect.centerx-bird.value.get_width()/2 < pipe2.rect.centerx + pipe2.value.get_width()/2 - 5 and bird.rect.centerx+ bird.value.get_width()/2 > pipe2.rect.centerx - pipe2.value.get_width()/2:
         if bird.rect.centery + bird.value.get_height()/2 > pipe2.rect.centery - pipe2.value.get_height()/2 or bird.rect.centery - bird.value.get_height()/2 < pipe2.rect2.centery + pipe2.value2.get_height()/2:
             die(dead)
+            if bird.rect.centery + bird.value.get_height()/2 > pipe2.rect.centery - pipe2.value.get_height()/2:
+                if bird.rect.centerx-bird.value.get_width()/2 < pipe2.rect.centerx + pipe2.value.get_width()/2 - 10 and bird.rect.centerx+ bird.value.get_width()/2 > pipe2.rect.centerx - pipe2.value.get_width()/2+10:
+                    dontmove=True
         else:
             betweenpipe2 = True
     else:
