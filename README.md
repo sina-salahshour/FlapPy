@@ -1,5 +1,7 @@
 # FlapPy
-flappy bird in python
+flappy bird in python.  
+
+
  installation:
 ```
 git clone https://github.com/sina-salahshour/flappy.git
